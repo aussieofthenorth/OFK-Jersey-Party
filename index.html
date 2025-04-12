@@ -82,6 +82,8 @@
         <img id="teamLogo" src="" alt="Team Logo" class="hidden">
     </div>
 
+     <audio id="cheer-sound" src="yay.mp3" preload="auto"></audio>
+
     <script>
         // Mock database of player names (First Name + Surname) and teams
         let playerData = {
@@ -406,7 +408,7 @@
             let firstName = document.getElementById("firstName").value.trim();
             let surname = document.getElementById("surname").value.trim();
             let fullName = `${firstName} ${surname}`;
-            typeWriter(`Welcome, ${fullName}, to...`, 'welcome-line', 60);
+            typeWriter(`Welcome, ${firstName}, to...`, 'welcome-line', 60);
 
             let teamName = playerData[fullName];
 
@@ -427,6 +429,11 @@
                     spread: 70,
                     origin: { x: 0.5, y: 0.5 }
                 });
+
+                // 🎯 Trigger haptic feedback
+                if (navigator.vibrate) {
+                  navigator.vibrate([100, 50, 100]); // Vibration pattern
+                }
 
                 document.getElementById("inputPage").classList.add("hidden");
                 document.getElementById("revealPage").classList.remove("hidden");
