@@ -447,6 +447,9 @@
                     logo.classList.add("hidden"); // Hide if no logo found
                 }
 
+                // Show the reveal page when it's time to reveal the team
+                document.getElementById('revealPage').classList.add('show'); // Add 'show' class to trigger fade-in
+
                 // Trigger confetti effect
                 confetti({
                     particleCount: 200,
