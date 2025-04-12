@@ -440,6 +440,11 @@
             } else {
                 alert("Name not found, please try again.");
             }
+
+             // Play audio
+              document.getElementById('cheer-sound').play(); // 🎉
+              new Audio(assets.audio).play(); // Team-specific audio
+            
             function typeWriter(text, elementId, speed = 60) {
                 let i = 0;
                 const target = document.getElementById(elementId);
