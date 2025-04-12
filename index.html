@@ -36,6 +36,17 @@
             opacity: 1; /* It’s immediately visible */
             z-index: 10;
         }
+
+        /* Style for the team reveal */
+        #teamName, #teamLogo {
+            opacity: 0; /* Start as invisible */
+            transition: opacity 1s ease-in; /* Fade-in transition */
+        }
+
+        /* Once the page is revealed, set them to visible */
+        #revealPage.show #teamName, #revealPage.show #teamLogo {
+            opacity: 1; /* Fade in to visible */
+        }
         
         #teamLogo {
             max-width: 200px;
