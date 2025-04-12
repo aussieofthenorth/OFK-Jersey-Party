@@ -82,7 +82,7 @@
         <img id="teamLogo" src="" alt="Team Logo" class="hidden">
     </div>
 
-     <audio id="cheer-sound" src="yay.mp3" preload="auto"></audio>
+    <audio id="cheer-sound" src="yay.mp3" preload="auto"></audio>
 
     <script>
         // Mock database of player names (First Name + Surname) and teams
@@ -430,6 +430,15 @@
                     origin: { x: 0.5, y: 0.5 }
                 });
 
+                // Play cheer sound
+                const cheerAudio = document.getElementById('cheer-sound');
+                if (cheerAudio) {
+                    cheerAudio.currentTime = 0;
+                    cheerAudio.play().catch(e => {
+                        console.warn("Autoplay blocked:", e);
+                    });
+                }
+
                 // 🎯 Trigger haptic feedback
                 if (navigator.vibrate) {
                   navigator.vibrate([100, 50, 100]); // Vibration pattern
@@ -439,11 +448,7 @@
                 document.getElementById("revealPage").classList.remove("hidden");
             } else {
                 alert("Name not found, please try again.");
-            }
-
-             // Play audio
-              document.getElementById('cheer-sound').play(); // 🎉
-              new Audio(assets.audio).play(); // Team-specific audio
+            }              
             
             function typeWriter(text, elementId, speed = 60) {
                 let i = 0;
