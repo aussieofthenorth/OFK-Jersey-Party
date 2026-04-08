@@ -1,292 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>Jersey Party 2026 Team Reveal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>Jersey Party 2026 Team Reveal</title>
 
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --ofk-light-blue: #0a9acf;
-            --ofk-dark-blue: #153781;
-            --ofk-highlight-green: #49edc7;
-            --ofk-extra-dark-blue: #0a1a63;
-            --white: #ffffff;
-            --text-soft: rgba(255, 255, 255, 0.8);
-            --panel: rgba(255, 255, 255, 0.1);
-            --border-soft: rgba(255, 255, 255, 0.14);
-            --shadow: 0 20px 60px rgba(10, 26, 99, 0.35);
-        }
+<style>
+:root {
+  --ofk-light-blue: #0a9acf;
+  --ofk-dark-blue: #153781;
+  --ofk-highlight-green: #49edc7;
+  --ofk-extra-dark-blue: #0a1a63;
+}
 
-        * {
-            box-sizing: border-box;
-        }
+body {
+  margin: 0;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-        body {
-            margin: 0;
-            font-family: "Space Grotesk", system-ui, sans-serif;
-            color: var(--white);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+  background:
+    radial-gradient(circle at top left, rgba(73,237,199,0.15), transparent),
+    radial-gradient(circle at bottom right, rgba(10,154,207,0.2), transparent),
+    linear-gradient(135deg, var(--ofk-extra-dark-blue), var(--ofk-dark-blue), var(--ofk-light-blue));
+}
 
-            background:
-                radial-gradient(circle at top left, rgba(73, 237, 199, 0.18), transparent 25%),
-                radial-gradient(circle at bottom right, rgba(10, 154, 207, 0.2), transparent 25%),
-                linear-gradient(135deg, var(--ofk-extra-dark-blue), var(--ofk-dark-blue), var(--ofk-light-blue));
-        }
+/* 🔥 Fire glow */
+.fire-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle at center, rgba(73,237,199,0.2), transparent 70%);
+  animation: firePulse 2s infinite alternate;
+}
 
-        .container {
-            width: 100%;
-            max-width: 420px;
-            padding: 26px 22px;
-            border-radius: 26px;
-            background: var(--panel);
-            border: 1px solid var(--border-soft);
-            backdrop-filter: blur(12px);
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
+@keyframes firePulse {
+  0% { opacity: 0.3; }
+  100% { opacity: 0.6; }
+}
 
-        .hidden {
-            display: none;
-        }
+.container {
+  z-index: 10;
+  width: 100%;
+  max-width: 420px;
+  padding: 26px;
+  border-radius: 26px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  text-align: center;
+}
 
-        h1 {
-            margin: 10px 0;
-            font-size: 34px;
-            text-transform: uppercase;
-            line-height: 1;
-        }
+.hidden { display: none; }
 
-        h2 {
-            margin: 10px 0;
-            font-size: 22px;
-            text-transform: uppercase;
-        }
+h1 {
+  font-size: 32px;
+  margin: 10px 0;
+}
 
-        h3 {
-            margin: 0 0 14px;
-            font-size: 14px;
-            color: var(--text-soft);
-        }
+input {
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  border-radius: 14px;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
 
-        input {
-            width: 100%;
-            padding: 14px 16px;
-            margin-bottom: 12px;
-            border-radius: 14px;
-            border: 1px solid rgba(255,255,255,0.25);
-            background: rgba(255,255,255,0.12);
-            color: var(--white);
-            font-size: 16px;
-            outline: none;
-        }
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 999px;
+  border: none;
+  background: var(--ofk-highlight-green);
+  color: #0a1a63;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-        input::placeholder {
-            color: rgba(255,255,255,0.6);
-        }
+#teamName {
+  font-size: 40px;
+  margin-top: 10px;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
 
-        input:focus {
-            border-color: var(--ofk-highlight-green);
-            box-shadow: 0 0 0 3px rgba(73, 237, 199, 0.2);
-        }
+#teamLogo {
+  max-width: 160px;
+  margin-top: 14px;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
 
-        button {
-            width: 100%;
-            padding: 14px;
-            margin-top: 12px;
-            border-radius: 999px;
-            border: none;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
+#revealPage.show #teamName,
+#revealPage.show #teamLogo {
+  opacity: 1;
+}
 
-            background: var(--ofk-highlight-green);
-            color: var(--ofk-extra-dark-blue);
+/* ⚽ explosion particles */
+.ball {
+  position: fixed;
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+  z-index: 20;
+}
 
-            transition: all 0.2s ease;
-        }
+.ball img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(73,237,199,0.7));
+  animation: spin 0.8s linear;
+}
 
-        button:hover {
-            transform: translateY(-1px);
-            background: #3de2bc;
-        }
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 
-        #welcomeLogo {
-            width: 110px;
-            margin-bottom: 14px;
-        }
+@keyframes explode {
+  0% {
+    transform: translate(0,0) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(1.2);
+    opacity: 0;
+  }
+}
+</style>
 
-        #teamLogo {
-            max-width: 180px;
-            margin-top: 18px;
-            opacity: 0;
-            transition: opacity 1.8s ease-in;
-        }
-
-        #teamName {
-            font-size: 40px;
-            margin-top: 14px;
-            opacity: 0;
-            transition: opacity 1.8s ease-in;
-        }
-
-        #revealPage.show #teamName,
-        #revealPage.show #teamLogo {
-            opacity: 1;
-        }
-
-        #welcome-line {
-            font-size: 16px;
-            color: var(--text-soft);
-            margin-bottom: 10px;
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 22px 18px;
-            }
-
-            h1 {
-                font-size: 28px;
-            }
-
-            #teamName {
-                font-size: 34px;
-            }
-        }
-    </style>
-
-    <!-- Confetti -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </head>
 
 <body>
 
-    <!-- Welcome Page -->
-    <div class="container" id="welcomePage">
-        <img id="welcomeLogo" src="OFK.png" alt="Welcome Logo">
-        <h1>OFK Jersey Reveal</h1>
-        <button onclick="startReveal()">Start</button>
-    </div>
+<div class="fire-bg"></div>
 
-    <!-- Input Page -->
-    <div class="container hidden" id="inputPage">
-        <h2>Find Your Team</h2>
-        <h3>(As per registration)</h3>
-        <input type="text" id="firstName" placeholder="First Name">
-        <input type="text" id="surname" placeholder="Surname">
-        <button onclick="revealTeam()">Reveal</button>
-    </div>
+<div class="container" id="welcomePage">
+  <img src="OFK.png" width="100">
+  <h1>OFK Jersey Reveal</h1>
+  <button onclick="startReveal()">Start</button>
+</div>
 
-    <!-- Reveal Page -->
-    <div class="container hidden" id="revealPage">
-        <h2 id="welcome-line"></h2>
-        <h1 id="teamName"></h1>
-        <img id="teamLogo" src="" alt="Team Logo" class="hidden">
-    </div>
+<div class="container hidden" id="inputPage">
+  <h2>Find Your Team</h2>
+  <input id="firstName" placeholder="First Name">
+  <input id="surname" placeholder="Surname">
+  <button onclick="revealTeam()">Reveal</button>
+</div>
 
-    <audio id="cheer-sound" src="im_coming_to_the_cotta.mp3" preload="auto"></audio>
+<div class="container hidden" id="revealPage">
+  <h2 id="welcome-line"></h2>
+  <h1 id="teamName"></h1>
+  <img id="teamLogo" class="hidden">
+</div>
 
-    <script>
-        let playerData = {
-            "Jeffrey Warren": "Vancity",
-            "Brandon Carless-Jones": "EY"
-        };
+<audio id="cheer-sound" src="im_coming_to_the_cotta.mp3"></audio>
 
-        let teamLogos = {
-            "Fountainhead": "fountainhead.jpg",
-            "Solve": "solve.jpg",
-            "Numbers": "numbers.png",
-            "EY": "EY.png",
-            "Fanny Bay Oyster": "fanny.png",
-            "Qmunity": "qmunity.png",
-            "Prince of Whales": "prince.svg",
-            "Pumpjack": "pumpjack.png",
-            "Shinden": "shinden.jpg",
-            "Vancity": "vancity.png",
-            "Forza": "forza.png",
-            "Junction": "junction.png"
-        };
+<script>
+let playerData = {
+  "Jeffrey Warren": "Vancity",
+  "Brandon Carless-Jones": "EY"
+};
 
-        function startReveal() {
-            document.getElementById("welcomePage").classList.add("hidden");
-            document.getElementById("inputPage").classList.remove("hidden");
-        }
+let teamLogos = {
+  "Vancity": "vancity.png",
+  "EY": "EY.png"
+};
 
-        function revealTeam() {
+function startReveal() {
+  welcomePage.classList.add("hidden");
+  inputPage.classList.remove("hidden");
+}
 
-            // 🔊 Play sound immediately
-            const cheerAudio = document.getElementById('cheer-sound');
-            if (cheerAudio) {
-                cheerAudio.currentTime = 0;
-                cheerAudio.play().catch(e => {
-                    console.warn("Audio blocked:", e);
-                });
-            }
+function soccerExplosion(x, y, count = 12) {
+  for (let i = 0; i < count; i++) {
+    const ball = document.createElement("div");
+    ball.className = "ball";
 
-            let firstName = document.getElementById("firstName").value.trim();
-            let surname = document.getElementById("surname").value.trim();
-            let fullName = `${firstName} ${surname}`;
+    const img = document.createElement("img");
+    img.src = "OFK.png";
+    ball.appendChild(img);
 
-            typeWriter(`Welcome, ${firstName}, to...`, 'welcome-line', 60);
+    document.body.appendChild(ball);
 
-            let teamName = playerData[fullName];
+    const angle = Math.random() * 2 * Math.PI;
+    const distance = 180 + Math.random() * 120;
 
-            if (teamName) {
-                document.getElementById("teamName").textContent = teamName;
-                let logo = document.getElementById("teamLogo");
+    const dx = Math.cos(angle) * distance + "px";
+    const dy = Math.sin(angle) * distance + "px";
 
-                if (teamLogos[teamName]) {
-                    logo.src = teamLogos[teamName];
-                    logo.classList.remove("hidden");
-                } else {
-                    logo.classList.add("hidden");
-                }
+    ball.style.left = x + "px";
+    ball.style.top = y + "px";
 
-                setTimeout(() => {
-                    document.getElementById('revealPage').classList.add('show');
-                }, 100);
+    ball.style.setProperty("--x", dx);
+    ball.style.setProperty("--y", dy);
 
-                confetti({
-                    particleCount: 200,
-                    spread: 70,
-                    origin: { x: 0.5, y: 0.5 }
-                });
+    ball.style.animation = "explode 800ms ease-out forwards";
 
-                if (navigator.vibrate) {
-                    navigator.vibrate([100, 50, 100]);
-                }
+    setTimeout(() => ball.remove(), 800);
+  }
+}
 
-                document.getElementById("inputPage").classList.add("hidden");
-                document.getElementById("revealPage").classList.remove("hidden");
-            } else {
-                alert("Name not found, please try again.");
-            }
+function revealTeam() {
 
-            function typeWriter(text, elementId, speed = 60) {
-                let i = 0;
-                const target = document.getElementById(elementId);
-                target.innerHTML = '';
+  // 🔊 sound instantly
+  const audio = document.getElementById("cheer-sound");
+  audio.currentTime = 0;
+  audio.play().catch(()=>{});
 
-                function type() {
-                    if (i < text.length) {
-                        target.innerHTML += text.charAt(i);
-                        i++;
-                        setTimeout(type, speed);
-                    }
-                }
-                type();
-            }
-        }
-    </script>
+  let first = firstName.value.trim();
+  let last = surname.value.trim();
+  let full = `${first} ${last}`;
+
+  typeWriter(`You’ve been selected...`, "welcome-line");
+
+  let team = playerData[full];
+
+  if (team) {
+
+    // 💥 explosions
+    soccerExplosion(window.innerWidth/2, window.innerHeight/2, 14);
+
+    setTimeout(() => {
+      inputPage.classList.add("hidden");
+      revealPage.classList.remove("hidden");
+      revealPage.classList.add("show");
+    }, 600);
+
+    teamName.textContent = team;
+
+    if (teamLogos[team]) {
+      teamLogo.src = teamLogos[team];
+      teamLogo.classList.remove("hidden");
+    }
+
+  } else {
+    alert("Name not found");
+  }
+}
+
+function typeWriter(text, id, speed=50){
+  let i=0;
+  let el=document.getElementById(id);
+  el.innerHTML="";
+  function t(){
+    if(i<text.length){
+      el.innerHTML+=text[i++];
+      setTimeout(t,speed);
+    }
+  }
+  t();
+}
+</script>
 
 </body>
 </html>
