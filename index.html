@@ -12,7 +12,7 @@
   --green: #49edc7;
 }
 
-/* 🚫 REMOVE SCROLL COMPLETELY */
+/* 🚫 TRUE NO SCROLL */
 html, body {
   margin: 0;
   padding: 0;
@@ -20,7 +20,7 @@ html, body {
   overflow: hidden;
 }
 
-/* CENTER EVERYTHING PERFECTLY */
+/* PERFECT CENTERING */
 body {
   font-family: "Space Grotesk", sans-serif;
   color: white;
@@ -30,12 +30,12 @@ body {
   background: linear-gradient(135deg, #0a1a63, #153781);
 }
 
-/* 🔥 REAL FLAMES (animated shapes) */
+/* 🔥 REALISTIC FLAMES */
 .fire-container {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 200px;
+  height: 260px;
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
@@ -44,28 +44,29 @@ body {
 .flame {
   position: absolute;
   bottom: 0;
-  width: 80px;
-  height: 120px;
-  background: radial-gradient(circle, rgba(255,120,0,0.8), transparent 70%);
+  width: 90px;
+  height: 160px;
+
+  background:
+    radial-gradient(circle at 50% 80%, rgba(255,200,0,0.9), transparent 40%),
+    radial-gradient(circle at 50% 60%, rgba(255,100,0,0.7), transparent 60%),
+    radial-gradient(circle at 50% 40%, rgba(255,0,0,0.6), transparent 70%);
+
   border-radius: 50%;
-  animation: rise 2s infinite ease-in;
+  filter: blur(2px);
+  animation: flameRise 2.2s infinite ease-in;
 }
 
-.flame:nth-child(1) { left: 10%; animation-delay: 0s; }
-.flame:nth-child(2) { left: 30%; animation-delay: 0.5s; }
-.flame:nth-child(3) { left: 50%; animation-delay: 1s; }
-.flame:nth-child(4) { left: 70%; animation-delay: 1.5s; }
-.flame:nth-child(5) { left: 90%; animation-delay: 0.7s; }
+.flame:nth-child(1){ left:10%; animation-delay:0s; }
+.flame:nth-child(2){ left:30%; animation-delay:0.4s; }
+.flame:nth-child(3){ left:50%; animation-delay:0.8s; }
+.flame:nth-child(4){ left:70%; animation-delay:1.2s; }
+.flame:nth-child(5){ left:85%; animation-delay:0.6s; }
 
-@keyframes rise {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 0.9;
-  }
-  100% {
-    transform: translateY(-180px) scale(1.5);
-    opacity: 0;
-  }
+@keyframes flameRise {
+  0% { transform: translateY(0) scale(1); opacity: 0.9; }
+  50% { transform: translateY(-120px) scale(1.2); }
+  100% { transform: translateY(-240px) scale(1.6); opacity: 0; }
 }
 
 /* CARD */
@@ -90,7 +91,7 @@ h2 {
   text-transform: uppercase;
 }
 
-/* INPUT (NO ZOOM FIX) */
+/* INPUT */
 input {
   width: 100%;
   padding: 14px;
@@ -145,16 +146,18 @@ button {
 
 .ball img {
   width: 100%;
-  animation: spin 0.8s linear;
+  animation: spin 1s linear;
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
+/* 🎆 BETTER FIREWORK */
 @keyframes explode {
-  0% { transform: translate(0,0) scale(0.4); opacity:1; }
-  100% { transform: translate(var(--x),var(--y)) scale(1.3); opacity:0; }
+  0% { transform: translate(0,0) scale(0.3); opacity:1; }
+  70% { opacity:1; }
+  100% { transform: translate(var(--x),var(--y)) scale(1.4); opacity:0; }
 }
 </style>
 </head>
@@ -189,7 +192,7 @@ button {
   <img id="teamLogo">
 </div>
 
-<audio id="cheer-sound" src="im_coming_to_the_cottage.mp3"></audio>
+<audio id="cheer-sound" src="im_coming_to_the_cotta.mp3"></audio>
 
 <script>
 let playerData = {
@@ -199,18 +202,18 @@ let playerData = {
 };
 
 let teamLogos = {
-    "Fountainhead": "fountainhead.jpg",
-    "Solve": "solve.jpg",
-    "Numbers": "numbers.png",
-    "EY": "EY.png",
-    "Fanny Bay Oyster": "fanny.png",
-    "Qmunity": "qmunity.png",
-    "Prince of Whales": "prince.svg",
-    "Pumpjack": "pumpjack.png",
-    "Shinden": "shinden.jpg",
-    "Vancity": "vancity.png",
-    "Forza": "forza.png",
-    "Junction": "junction.png"
+  "Fountainhead": "fountainhead.jpg",
+  "Solve": "solve.jpg",
+  "Numbers": "numbers.png",
+  "EY": "EY.png",
+  "Fanny Bay Oyster": "fanny.png",
+  "Qmunity": "qmunity.png",
+  "Prince of Whales": "prince.svg",
+  "Pumpjack": "pumpjack.png",
+  "Shinden": "shinden.jpg",
+  "Vancity": "vancity.png",
+  "Forza": "forza.png",
+  "Junction": "junction.png"
 };
 
 function startReveal(){
@@ -230,7 +233,7 @@ function explosion(x,y,count=14){
     document.body.appendChild(b);
 
     let angle=Math.random()*Math.PI*2;
-    let dist=220+Math.random()*140;
+    let dist=260+Math.random()*180;
 
     b.style.left=x+"px";
     b.style.top=y+"px";
@@ -238,18 +241,20 @@ function explosion(x,y,count=14){
     b.style.setProperty("--x",Math.cos(angle)*dist+"px");
     b.style.setProperty("--y",Math.sin(angle)*dist+"px");
 
-    b.style.animation="explode 1200ms ease-out forwards";
+    b.style.animation="explode 1400ms ease-out forwards";
 
-    setTimeout(()=>b.remove(),1200);
+    setTimeout(()=>b.remove(),1400);
   }
 }
 
 function fireworksShow(){
-  for(let i=0;i<6;i++){
+  for(let i=0;i<8;i++){
     setTimeout(()=>{
-      explosion(innerWidth*(0.2+Math.random()*0.6),
-                innerHeight*(0.3+Math.random()*0.4));
-    },i*250);
+      explosion(
+        innerWidth*(0.2+Math.random()*0.6),
+        innerHeight*(0.2+Math.random()*0.3)
+      );
+    },i*220);
   }
 }
 
@@ -270,7 +275,7 @@ function revealTeam(){
       inputPage.classList.add("hidden");
       revealPage.classList.remove("hidden");
       revealPage.classList.add("show");
-    },900);
+    },1000);
 
     teamName.textContent=team;
 
