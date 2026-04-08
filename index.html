@@ -95,15 +95,23 @@ body {
   z-index: 10;
 }
 
-/* 🖼 LOGO (UPDATED) */
+/* 🖼 LOGO (FIXED GAP) */
 #welcomeLogo {
+  display: block;                 /* 🔥 removes inline spacing */
   width: 160px;
   max-width: 50%;
-  margin-bottom: 16px;
+  margin: 0 auto 6px;             /* 🔥 tight spacing */
   filter: drop-shadow(0 0 10px rgba(73,237,199,0.4));
 }
 
-h1 { text-transform: uppercase; font-size: 34px; }
+/* 🔥 TITLE (FIXED GAP) */
+h1 {
+  margin: 0;                      /* 🔥 remove default gap */
+  margin-bottom: 16px;
+  font-size: 34px;
+  text-transform: uppercase;
+}
+
 h2 { text-transform: uppercase; }
 
 .form-group {
