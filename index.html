@@ -4,97 +4,183 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Jersey Party 2026 Team Reveal</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --ofk-light-blue: #0a9acf;
+            --ofk-dark-blue: #153781;
+            --ofk-highlight-green: #49edc7;
+            --ofk-extra-dark-blue: #0a1a63;
+            --white: #ffffff;
+            --text-soft: rgba(255, 255, 255, 0.8);
+            --panel: rgba(255, 255, 255, 0.1);
+            --border-soft: rgba(255, 255, 255, 0.14);
+            --shadow: 0 20px 60px rgba(10, 26, 99, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background-color: #273678; /* Background color changed */
-            color: white;
-            padding: 20px;
+            margin: 0;
+            font-family: "Space Grotesk", system-ui, sans-serif;
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                radial-gradient(circle at top left, rgba(73, 237, 199, 0.18), transparent 25%),
+                radial-gradient(circle at bottom right, rgba(10, 154, 207, 0.2), transparent 25%),
+                linear-gradient(135deg, var(--ofk-extra-dark-blue), var(--ofk-dark-blue), var(--ofk-light-blue));
         }
+
         .container {
-            max-width: 500px;
-            margin: auto;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-            color: black;
+            width: 100%;
+            max-width: 420px;
+            padding: 26px 22px;
+            border-radius: 26px;
+            background: var(--panel);
+            border: 1px solid var(--border-soft);
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow);
+            text-align: center;
         }
+
         .hidden {
             display: none;
         }
 
-        /* Ensure the reveal page starts at the top */
-        #revealPage {
-            position: absolute; /* Keeps it at the top */
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 20px;
-            text-align: center;
-            opacity: 1; /* It’s immediately visible */
-            z-index: 10;
-        }
-        
-        #teamLogo {
-            max-width: 200px;
-            margin-top: 10px;
-        }
-        #welcomeLogo {
-            width: 300px;
-            margin-bottom: 10px;
-        }
-        
-        /* Style for the team reveal */
-        #teamName, #teamLogo {
-            opacity: 0; /* Start as invisible */
-            transition: opacity 3s ease-in; /* Fade-in transition */
+        h1 {
+            margin: 10px 0;
+            font-size: 34px;
+            text-transform: uppercase;
+            line-height: 1;
         }
 
-        /* Once the page is revealed, set them to visible */
-        #revealPage.show #teamName, #revealPage.show #teamLogo {
-            opacity: 1; /* Fade in to visible */
+        h2 {
+            margin: 10px 0;
+            font-size: 22px;
+            text-transform: uppercase;
         }
-        
+
+        h3 {
+            margin: 0 0 14px;
+            font-size: 14px;
+            color: var(--text-soft);
+        }
+
         input {
-            padding: 10px;
-            margin: 10px;
-            width: 80%;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        button {
-            padding: 10px 20px;
-            margin-top: 20px;
-            background-color: #F5A623; /* Refined button color */
-            color: white;
+            width: 100%;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.25);
+            background: rgba(255,255,255,0.12);
+            color: var(--white);
             font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            outline: none;
         }
+
+        input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        input:focus {
+            border-color: var(--ofk-highlight-green);
+            box-shadow: 0 0 0 3px rgba(73, 237, 199, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 12px;
+            border-radius: 999px;
+            border: none;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+
+            background: var(--ofk-highlight-green);
+            color: var(--ofk-extra-dark-blue);
+
+            transition: all 0.2s ease;
+        }
+
         button:hover {
-            background-color: #D9882E; /* Button hover effect */
+            transform: translateY(-1px);
+            background: #3de2bc;
+        }
+
+        #welcomeLogo {
+            width: 110px;
+            margin-bottom: 14px;
+        }
+
+        #teamLogo {
+            max-width: 180px;
+            margin-top: 18px;
+            opacity: 0;
+            transition: opacity 1.8s ease-in;
+        }
+
+        #teamName {
+            font-size: 40px;
+            margin-top: 14px;
+            opacity: 0;
+            transition: opacity 1.8s ease-in;
+        }
+
+        #revealPage.show #teamName,
+        #revealPage.show #teamLogo {
+            opacity: 1;
+        }
+
+        #welcome-line {
+            font-size: 16px;
+            color: var(--text-soft);
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 22px 18px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            #teamName {
+                font-size: 34px;
+            }
         }
     </style>
-    <!-- Confetti.js CDN -->
+
+    <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </head>
+
 <body>
 
     <!-- Welcome Page -->
     <div class="container" id="welcomePage">
         <img id="welcomeLogo" src="OFK.png" alt="Welcome Logo">
-        <h1>Welcome to the Jersey Party</h1>
+        <h1>OFK Jersey Reveal</h1>
         <button onclick="startReveal()">Start</button>
     </div>
 
     <!-- Input Page -->
     <div class="container hidden" id="inputPage">
-        <h2>Enter Your First Name and Surname</h2>
-        <h3>(As per registration, case-sensitive)</h3>
+        <h2>Find Your Team</h2>
+        <h3>(As per registration)</h3>
         <input type="text" id="firstName" placeholder="First Name">
         <input type="text" id="surname" placeholder="Surname">
         <button onclick="revealTeam()">Reveal</button>
@@ -110,13 +196,11 @@
     <audio id="cheer-sound" src="yay.mp3" preload="auto"></audio>
 
     <script>
-        // Mock database of player names (First Name + Surname) and teams
         let playerData = {
             "Jeffrey Warren": "Vancity",
             "Brandon Carless-Jones": "EY"
-                    };
+        };
 
-        // Team logos
         let teamLogos = {
             "Fountainhead": "fountainhead.jpg",
             "Solve": "solve.jpg",
@@ -130,7 +214,6 @@
             "Vancity": "vancity.png",
             "Forza": "forza.png",
             "Junction": "junction.png"
-
         };
 
         function startReveal() {
@@ -139,10 +222,10 @@
         }
 
         function revealTeam() {
-            // Get first name and surname from inputs
             let firstName = document.getElementById("firstName").value.trim();
             let surname = document.getElementById("surname").value.trim();
             let fullName = `${firstName} ${surname}`;
+
             typeWriter(`Welcome, ${firstName}, to...`, 'welcome-line', 60);
 
             let teamName = playerData[fullName];
@@ -155,45 +238,40 @@
                     logo.src = teamLogos[teamName];
                     logo.classList.remove("hidden");
                 } else {
-                    logo.classList.add("hidden"); // Hide if no logo found
+                    logo.classList.add("hidden");
                 }
 
-                // Show the reveal page when it's time to reveal the team
                 setTimeout(() => {
                     document.getElementById('revealPage').classList.add('show');
-                 }, 100); // delay of 100 milliseconds
+                }, 100);
 
-                // Trigger confetti effect
                 confetti({
                     particleCount: 200,
                     spread: 70,
                     origin: { x: 0.5, y: 0.5 }
                 });
 
-                // Play cheer sound
                 const cheerAudio = document.getElementById('cheer-sound');
                 if (cheerAudio) {
                     cheerAudio.currentTime = 0;
-                    cheerAudio.play().catch(e => {
-                        console.warn("Autoplay blocked:", e);
-                    });
+                    cheerAudio.play().catch(e => {});
                 }
 
-                // 🎯 Trigger haptic feedback
                 if (navigator.vibrate) {
-                  navigator.vibrate([100, 50, 100]); // Vibration pattern
+                    navigator.vibrate([100, 50, 100]);
                 }
 
                 document.getElementById("inputPage").classList.add("hidden");
                 document.getElementById("revealPage").classList.remove("hidden");
             } else {
                 alert("Name not found, please try again.");
-            }              
-            
+            }
+
             function typeWriter(text, elementId, speed = 60) {
                 let i = 0;
                 const target = document.getElementById(elementId);
                 target.innerHTML = '';
+
                 function type() {
                     if (i < text.length) {
                         target.innerHTML += text.charAt(i);
