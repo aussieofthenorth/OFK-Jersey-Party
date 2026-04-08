@@ -12,7 +12,12 @@
   --green: #49edc7;
 }
 
-/* 🚫 NO SCROLL + iOS FIX */
+/* GLOBAL FIX */
+* {
+  box-sizing: border-box; /* 🔥 fixes ALL width inconsistencies */
+}
+
+/* NO SCROLL */
 html, body {
   margin: 0;
   padding: 0;
@@ -23,17 +28,14 @@ html, body {
 body {
   font-family: "Space Grotesk", sans-serif;
   color: white;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
-  min-height: 100dvh; /* 🔥 iOS FIX */
-
+  min-height: 100dvh;
   background: linear-gradient(135deg, #0a1a63, #153781);
 }
 
-/* 🔥 REAL FLAMES */
+/* 🔥 FLAMES */
 .fire-container {
   position: fixed;
   bottom: 0;
@@ -72,22 +74,16 @@ body {
   100% { transform: translateY(-240px) scale(1.6); opacity: 0; }
 }
 
-/* 🔥 FIXED CONTAINER (NO OVERFLOW) */
+/* CONTAINER */
 .container {
-  z-index: 10;
-
-  width: calc(100% - 32px); /* 🔥 FIX */
+  width: calc(100% - 32px);
   max-width: 420px;
-
   padding: 24px;
-  margin: 0 auto;
-
   border-radius: 22px;
-  backdrop-filter: blur(12px);
   background: rgba(0,0,0,0.4);
-
+  backdrop-filter: blur(12px);
   text-align: center;
-  box-sizing: border-box; /* 🔥 IMPORTANT */
+  z-index: 10;
 }
 
 /* TEXT */
@@ -100,26 +96,34 @@ h2 {
   text-transform: uppercase;
 }
 
+/* FORM LAYOUT (🔥 KEY FIX) */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* INPUT + BUTTON UNIFIED */
+input,
+button {
+  width: 100%;
+  display: block;
+  border-radius: 999px;
+  border: none;
+  font-size: 16px;
+}
+
 /* INPUT */
 input {
-  width: 100%;
-  padding: 14px;
-  margin: 10px 0;
-  border-radius: 12px;
-  border: none;
-  font-size: 16px; /* 🔥 prevents zoom */
+  padding: 16px;
 }
 
 /* BUTTON */
 button {
-  width: 100%;
   padding: 16px;
-  border-radius: 999px;
-  border: none;
   background: var(--green);
   color: #0a1a63;
   font-weight: 700;
-  font-size: 16px;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -145,7 +149,7 @@ button {
   opacity: 1;
 }
 
-/* ⚽ PARTICLES */
+/* ⚽ FIREWORKS */
 .ball {
   position: fixed;
   width: 30px;
@@ -162,7 +166,6 @@ button {
   to { transform: rotate(360deg); }
 }
 
-/* 🎆 FIREWORK */
 @keyframes explode {
   0% { transform: translate(0,0) scale(0.3); opacity:1; }
   70% { opacity:1; }
@@ -173,7 +176,6 @@ button {
 
 <body>
 
-<!-- 🔥 Flames -->
 <div class="fire-container">
   <div class="flame"></div>
   <div class="flame"></div>
@@ -190,9 +192,13 @@ button {
 
 <div class="container hidden" id="inputPage">
   <h2>Find Your Team</h2>
-  <input id="firstName" placeholder="First Name">
-  <input id="surname" placeholder="Surname">
-  <button onclick="revealTeam()">Reveal</button>
+
+  <div class="form-group">
+    <input id="firstName" placeholder="First Name">
+    <input id="surname" placeholder="Surname">
+    <button onclick="revealTeam()">Reveal</button>
+  </div>
+
 </div>
 
 <div class="container hidden" id="revealPage">
