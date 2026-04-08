@@ -222,6 +222,16 @@
         }
 
         function revealTeam() {
+
+            // 🔊 Play sound immediately
+            const cheerAudio = document.getElementById('cheer-sound');
+            if (cheerAudio) {
+                cheerAudio.currentTime = 0;
+                cheerAudio.play().catch(e => {
+                    console.warn("Audio blocked:", e);
+                });
+            }
+
             let firstName = document.getElementById("firstName").value.trim();
             let surname = document.getElementById("surname").value.trim();
             let fullName = `${firstName} ${surname}`;
@@ -250,12 +260,6 @@
                     spread: 70,
                     origin: { x: 0.5, y: 0.5 }
                 });
-
-                const cheerAudio = document.getElementById('cheer-sound');
-                if (cheerAudio) {
-                    cheerAudio.currentTime = 0;
-                    cheerAudio.play().catch(e => {});
-                }
 
                 if (navigator.vibrate) {
                     navigator.vibrate([100, 50, 100]);
