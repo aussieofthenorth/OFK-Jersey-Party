@@ -12,7 +12,7 @@
   --green: #49edc7;
 }
 
-/* 🚫 TRUE NO SCROLL */
+/* 🚫 NO SCROLL + iOS FIX */
 html, body {
   margin: 0;
   padding: 0;
@@ -20,17 +20,20 @@ html, body {
   overflow: hidden;
 }
 
-/* PERFECT CENTERING */
 body {
   font-family: "Space Grotesk", sans-serif;
   color: white;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
+  min-height: 100dvh; /* 🔥 iOS FIX */
+
   background: linear-gradient(135deg, #0a1a63, #153781);
 }
 
-/* 🔥 REALISTIC FLAMES */
+/* 🔥 REAL FLAMES */
 .fire-container {
   position: fixed;
   bottom: 0;
@@ -69,16 +72,22 @@ body {
   100% { transform: translateY(-240px) scale(1.6); opacity: 0; }
 }
 
-/* CARD */
+/* 🔥 FIXED CONTAINER (NO OVERFLOW) */
 .container {
   z-index: 10;
-  width: 90%;
+
+  width: calc(100% - 32px); /* 🔥 FIX */
   max-width: 420px;
+
   padding: 24px;
+  margin: 0 auto;
+
   border-radius: 22px;
   backdrop-filter: blur(12px);
   background: rgba(0,0,0,0.4);
+
   text-align: center;
+  box-sizing: border-box; /* 🔥 IMPORTANT */
 }
 
 /* TEXT */
@@ -98,7 +107,7 @@ input {
   margin: 10px 0;
   border-radius: 12px;
   border: none;
-  font-size: 16px;
+  font-size: 16px; /* 🔥 prevents zoom */
 }
 
 /* BUTTON */
@@ -153,7 +162,7 @@ button {
   to { transform: rotate(360deg); }
 }
 
-/* 🎆 BETTER FIREWORK */
+/* 🎆 FIREWORK */
 @keyframes explode {
   0% { transform: translate(0,0) scale(0.3); opacity:1; }
   70% { opacity:1; }
