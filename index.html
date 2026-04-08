@@ -12,9 +12,8 @@
   --green: #49edc7;
 }
 
-/* GLOBAL FIX */
 * {
-  box-sizing: border-box; /* 🔥 fixes ALL width inconsistencies */
+  box-sizing: border-box;
 }
 
 /* NO SCROLL */
@@ -35,7 +34,7 @@ body {
   background: linear-gradient(135deg, #0a1a63, #153781);
 }
 
-/* 🔥 FLAMES */
+/* 🔥 FIRE CONTAINER */
 .fire-container {
   position: fixed;
   bottom: 0;
@@ -46,35 +45,65 @@ body {
   overflow: hidden;
 }
 
+/* 🔥 FLAMES */
 .flame {
   position: absolute;
   bottom: 0;
-  width: 90px;
-  height: 160px;
+  width: 60px;
+  height: 140px;
 
   background:
-    radial-gradient(circle at 50% 80%, rgba(255,200,0,0.9), transparent 40%),
-    radial-gradient(circle at 50% 60%, rgba(255,100,0,0.7), transparent 60%),
-    radial-gradient(circle at 50% 40%, rgba(255,0,0,0.6), transparent 70%);
+    radial-gradient(circle at 50% 80%, rgba(255,220,120,1), transparent 40%),
+    radial-gradient(circle at 50% 60%, rgba(255,140,0,0.9), transparent 60%),
+    radial-gradient(circle at 50% 30%, rgba(255,0,0,0.7), transparent 70%);
 
+  border-radius: 50% 50% 40% 40%;
+  filter: blur(6px);
+
+  animation: flameFlicker 1.6s infinite ease-in-out;
+}
+
+.flame:nth-child(1){ left:15%; animation-delay:0s; }
+.flame:nth-child(2){ left:35%; animation-delay:0.3s; }
+.flame:nth-child(3){ left:55%; animation-delay:0.6s; }
+.flame:nth-child(4){ left:75%; animation-delay:0.9s; }
+.flame:nth-child(5){ left:90%; animation-delay:0.4s; }
+
+@keyframes flameFlicker {
+  0% { transform: scale(1,1) translateY(0); opacity: 0.9; }
+  50% { transform: scale(0.8,1.4) translateY(-40px); opacity: 1; }
+  100% { transform: scale(1.1,1.8) translateY(-120px); opacity: 0; }
+}
+
+/* ✨ EMBERS */
+.ember {
+  position: fixed;
+  bottom: 0;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  filter: blur(2px);
-  animation: flameRise 2.2s infinite ease-in;
+
+  background: radial-gradient(circle, #ffd27f, #ff6a00);
+
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 1;
+
+  animation: emberRise linear forwards;
 }
 
-.flame:nth-child(1){ left:10%; animation-delay:0s; }
-.flame:nth-child(2){ left:30%; animation-delay:0.4s; }
-.flame:nth-child(3){ left:50%; animation-delay:0.8s; }
-.flame:nth-child(4){ left:70%; animation-delay:1.2s; }
-.flame:nth-child(5){ left:85%; animation-delay:0.6s; }
-
-@keyframes flameRise {
-  0% { transform: translateY(0) scale(1); opacity: 0.9; }
-  50% { transform: translateY(-120px) scale(1.2); }
-  100% { transform: translateY(-240px) scale(1.6); opacity: 0; }
+@keyframes emberRise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-300px) translateX(var(--drift)) scale(0.5);
+    opacity: 0;
+  }
 }
 
-/* CONTAINER */
+/* CARD */
 .container {
   width: calc(100% - 32px);
   max-width: 420px;
@@ -96,16 +125,15 @@ h2 {
   text-transform: uppercase;
 }
 
-/* FORM LAYOUT (🔥 KEY FIX) */
+/* FORM */
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-/* INPUT + BUTTON UNIFIED */
-input,
-button {
+/* INPUT + BUTTON */
+input, button {
   width: 100%;
   display: block;
   border-radius: 999px;
@@ -113,12 +141,10 @@ button {
   font-size: 16px;
 }
 
-/* INPUT */
 input {
   padding: 16px;
 }
 
-/* BUTTON */
 button {
   padding: 16px;
   background: var(--green);
@@ -176,6 +202,7 @@ button {
 
 <body>
 
+<!-- 🔥 Flames -->
 <div class="fire-container">
   <div class="flame"></div>
   <div class="flame"></div>
@@ -236,6 +263,21 @@ function startReveal(){
   inputPage.classList.remove("hidden");
 }
 
+/* 🔥 EMBERS LOOP */
+function spawnEmber() {
+  const ember = document.createElement("div");
+  ember.className = "ember";
+
+  ember.style.left = Math.random() * window.innerWidth + "px";
+  ember.style.setProperty("--drift", (Math.random()*80-40)+"px");
+  ember.style.animationDuration = (2 + Math.random()*2)+"s";
+
+  document.body.appendChild(ember);
+  setTimeout(()=>ember.remove(),4000);
+}
+setInterval(spawnEmber,120);
+
+/* 🎆 FIREWORKS */
 function explosion(x,y,count=14){
   for(let i=0;i<count;i++){
     let b=document.createElement("div");
