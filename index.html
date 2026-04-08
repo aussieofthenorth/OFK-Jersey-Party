@@ -8,33 +8,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --green: #49edc7;
-}
+:root { --green: #49edc7; }
+* { box-sizing: border-box; }
 
-* {
-  box-sizing: border-box;
-}
-
-/* NO SCROLL */
 html, body {
   margin: 0;
-  padding: 0;
   height: 100%;
   overflow: hidden;
 }
 
 body {
   font-family: "Space Grotesk", sans-serif;
-  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100dvh;
   background: linear-gradient(135deg, #0a1a63, #153781);
+  color: white;
 }
 
-/* 🔥 FIRE CONTAINER */
+/* 🔥 FLAMES */
 .fire-container {
   position: fixed;
   bottom: 0;
@@ -42,37 +35,34 @@ body {
   height: 260px;
   pointer-events: none;
   z-index: 0;
-  overflow: hidden;
 }
 
-/* 🔥 FLAMES */
 .flame {
   position: absolute;
   bottom: 0;
   width: 60px;
   height: 140px;
-
-  background:
-    radial-gradient(circle at 50% 80%, rgba(255,220,120,1), transparent 40%),
-    radial-gradient(circle at 50% 60%, rgba(255,140,0,0.9), transparent 60%),
-    radial-gradient(circle at 50% 30%, rgba(255,0,0,0.7), transparent 70%);
-
   border-radius: 50% 50% 40% 40%;
   filter: blur(6px);
+
+  background:
+    radial-gradient(circle at 50% 80%, #ffd27f, transparent 40%),
+    radial-gradient(circle at 50% 60%, #ff6a00, transparent 60%),
+    radial-gradient(circle at 50% 30%, #ff0000, transparent 70%);
 
   animation: flameFlicker 1.6s infinite ease-in-out;
 }
 
-.flame:nth-child(1){ left:15%; animation-delay:0s; }
+.flame:nth-child(1){ left:15%; }
 .flame:nth-child(2){ left:35%; animation-delay:0.3s; }
 .flame:nth-child(3){ left:55%; animation-delay:0.6s; }
 .flame:nth-child(4){ left:75%; animation-delay:0.9s; }
 .flame:nth-child(5){ left:90%; animation-delay:0.4s; }
 
 @keyframes flameFlicker {
-  0% { transform: scale(1,1) translateY(0); opacity: 0.9; }
-  50% { transform: scale(0.8,1.4) translateY(-40px); opacity: 1; }
-  100% { transform: scale(1.1,1.8) translateY(-120px); opacity: 0; }
+  0% { transform: scale(1) translateY(0); opacity:0.9; }
+  50% { transform: scale(0.8,1.4) translateY(-40px); }
+  100% { transform: scale(1.1,1.8) translateY(-120px); opacity:0; }
 }
 
 /* ✨ EMBERS */
@@ -82,23 +72,13 @@ body {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-
   background: radial-gradient(circle, #ffd27f, #ff6a00);
-
-  opacity: 0.8;
-  pointer-events: none;
-  z-index: 1;
-
   animation: emberRise linear forwards;
 }
 
 @keyframes emberRise {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 0.9;
-  }
   100% {
-    transform: translateY(-300px) translateX(var(--drift)) scale(0.5);
+    transform: translateY(-300px) translateX(var(--drift));
     opacity: 0;
   }
 }
@@ -115,38 +95,24 @@ body {
   z-index: 10;
 }
 
-/* TEXT */
-h1 {
-  font-size: 34px;
-  text-transform: uppercase;
-}
+h1 { text-transform: uppercase; font-size: 34px; }
+h2 { text-transform: uppercase; }
 
-h2 {
-  text-transform: uppercase;
-}
-
-/* FORM */
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-/* INPUT + BUTTON */
 input, button {
   width: 100%;
-  display: block;
   border-radius: 999px;
   border: none;
   font-size: 16px;
-}
-
-input {
   padding: 16px;
 }
 
 button {
-  padding: 16px;
   background: var(--green);
   color: #0a1a63;
   font-weight: 700;
@@ -154,10 +120,8 @@ button {
   cursor: pointer;
 }
 
-/* HIDE */
 .hidden { display: none; }
 
-/* REVEAL */
 #teamName {
   font-size: 40px;
   opacity: 0;
@@ -175,12 +139,10 @@ button {
   opacity: 1;
 }
 
-/* ⚽ FIREWORKS */
+/* 🎆 FIREWORKS */
 .ball {
   position: fixed;
   width: 30px;
-  height: 30px;
-  z-index: 20;
 }
 
 .ball img {
@@ -193,21 +155,19 @@ button {
 }
 
 @keyframes explode {
-  0% { transform: translate(0,0) scale(0.3); opacity:1; }
-  70% { opacity:1; }
-  100% { transform: translate(var(--x),var(--y)) scale(1.4); opacity:0; }
+  100% {
+    transform: translate(var(--x),var(--y)) scale(1.4);
+    opacity: 0;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🔥 Flames -->
 <div class="fire-container">
-  <div class="flame"></div>
-  <div class="flame"></div>
-  <div class="flame"></div>
-  <div class="flame"></div>
+  <div class="flame"></div><div class="flame"></div>
+  <div class="flame"></div><div class="flame"></div>
   <div class="flame"></div>
 </div>
 
@@ -223,9 +183,9 @@ button {
   <div class="form-group">
     <input id="firstName" placeholder="First Name">
     <input id="surname" placeholder="Surname">
+    <input id="middleInitial" placeholder="Middle Initial" maxlength="1" class="hidden">
     <button onclick="revealTeam()">Reveal</button>
   </div>
-
 </div>
 
 <div class="container hidden" id="revealPage">
@@ -237,11 +197,59 @@ button {
 <audio id="cheer-sound" src="im_coming_to_the_cotta.mp3"></audio>
 
 <script>
-let playerData = {
-  "Jeffrey Warren": "Vancity",
-  "Aaron Gill": "Fountainhead",
-  "Brandon Carless-Jones": "EY"
-};
+
+/* 🔥 EMBERS LOOP */
+setInterval(()=>{
+  let e=document.createElement("div");
+  e.className="ember";
+  e.style.left=Math.random()*innerWidth+"px";
+  e.style.setProperty("--drift",(Math.random()*80-40)+"px");
+  e.style.animationDuration=(2+Math.random()*2)+"s";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),4000);
+},120);
+
+/* 🎆 FIREWORKS */
+function explosion(x,y,count=12){
+  for(let i=0;i<count;i++){
+    let b=document.createElement("div");
+    b.className="ball";
+    let img=document.createElement("img");
+    img.src="OFK.png";
+    b.appendChild(img);
+    document.body.appendChild(b);
+
+    let angle=Math.random()*Math.PI*2;
+    let dist=250+Math.random()*150;
+
+    b.style.left=x+"px";
+    b.style.top=y+"px";
+
+    b.style.setProperty("--x",Math.cos(angle)*dist+"px");
+    b.style.setProperty("--y",Math.sin(angle)*dist+"px");
+
+    b.style.animation="explode 1400ms forwards";
+    setTimeout(()=>b.remove(),1400);
+  }
+}
+
+function fireworksShow(){
+  for(let i=0;i<8;i++){
+    setTimeout(()=>{
+      explosion(innerWidth*(0.2+Math.random()*0.6),
+                innerHeight*(0.2+Math.random()*0.3));
+    },i*200);
+  }
+}
+
+/* 👤 PLAYER DATA */
+let playerData = [
+  { firstName:"Aaron", middleInitial:"", surname:"Gill", team:"Fountainhead" },
+  { firstName:"Jeffrey", middleInitial:"", surname:"Warren", team:"Vancity" },
+  { firstName:"Brandon", middleInitial:"", surname:"Carless-Jones", team:"EY" },
+  { firstName:"Andrew", middleInitial:"D", surname:"Wilson", team:"Forza" },
+  { firstName:"Andrew", middleInitial:"F", surname:"Wilson", team:"Solve" }
+];
 
 let teamLogos = {
   "Fountainhead": "fountainhead.jpg",
@@ -263,88 +271,67 @@ function startReveal(){
   inputPage.classList.remove("hidden");
 }
 
-/* 🔥 EMBERS LOOP */
-function spawnEmber() {
-  const ember = document.createElement("div");
-  ember.className = "ember";
-
-  ember.style.left = Math.random() * window.innerWidth + "px";
-  ember.style.setProperty("--drift", (Math.random()*80-40)+"px");
-  ember.style.animationDuration = (2 + Math.random()*2)+"s";
-
-  document.body.appendChild(ember);
-  setTimeout(()=>ember.remove(),4000);
-}
-setInterval(spawnEmber,120);
-
-/* 🎆 FIREWORKS */
-function explosion(x,y,count=14){
-  for(let i=0;i<count;i++){
-    let b=document.createElement("div");
-    b.className="ball";
-
-    let img=document.createElement("img");
-    img.src="OFK.png";
-    b.appendChild(img);
-
-    document.body.appendChild(b);
-
-    let angle=Math.random()*Math.PI*2;
-    let dist=260+Math.random()*180;
-
-    b.style.left=x+"px";
-    b.style.top=y+"px";
-
-    b.style.setProperty("--x",Math.cos(angle)*dist+"px");
-    b.style.setProperty("--y",Math.sin(angle)*dist+"px");
-
-    b.style.animation="explode 1400ms ease-out forwards";
-
-    setTimeout(()=>b.remove(),1400);
-  }
-}
-
-function fireworksShow(){
-  for(let i=0;i<8;i++){
-    setTimeout(()=>{
-      explosion(
-        innerWidth*(0.2+Math.random()*0.6),
-        innerHeight*(0.2+Math.random()*0.3)
-      );
-    },i*220);
-  }
-}
-
+/* 🔍 MAIN LOGIC */
 function revealTeam(){
+
+  let first = firstName.value.trim().toLowerCase();
+  let last = surname.value.trim().toLowerCase();
+  let middle = middleInitial.value.trim().toLowerCase();
+
+  let matches = playerData.filter(p =>
+    p.firstName.toLowerCase() === first &&
+    p.surname.toLowerCase() === last
+  );
+
+  if(matches.length === 0){
+    alert("Name not found");
+    return;
+  }
+
+  if(matches.length === 1){
+    showTeam(matches[0]);
+    return;
+  }
+
+  if(middle === ""){
+    middleInitial.classList.remove("hidden");
+    middleInitial.focus();
+    alert("Multiple players found. Enter your middle initial.");
+    return;
+  }
+
+  let player = matches.find(p =>
+    p.middleInitial.toLowerCase() === middle
+  );
+
+  if(player){
+    showTeam(player);
+  } else {
+    alert("Middle initial incorrect");
+  }
+}
+
+function showTeam(player){
 
   let a=document.getElementById("cheer-sound");
   a.currentTime=0;
   a.play().catch(()=>{});
 
-  let name=firstName.value.trim()+" "+surname.value.trim();
-  let team=playerData[name];
+  fireworksShow();
 
-  if(team){
+  setTimeout(()=>{
+    inputPage.classList.add("hidden");
+    revealPage.classList.remove("hidden");
+    revealPage.classList.add("show");
+  },1000);
 
-    fireworksShow();
+  teamName.textContent = player.team;
 
-    setTimeout(()=>{
-      inputPage.classList.add("hidden");
-      revealPage.classList.remove("hidden");
-      revealPage.classList.add("show");
-    },1000);
-
-    teamName.textContent=team;
-
-    if(teamLogos[team]){
-      teamLogo.src=teamLogos[team];
-    }
-
-  } else {
-    alert("Name not found");
+  if(teamLogos[player.team]){
+    teamLogo.src = teamLogos[player.team];
   }
 }
-</script>
 
+</script>
 </body>
 </html>
