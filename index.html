@@ -95,6 +95,14 @@ body {
   z-index: 10;
 }
 
+/* 🖼 LOGO (UPDATED) */
+#welcomeLogo {
+  width: 160px;
+  max-width: 50%;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 0 10px rgba(73,237,199,0.4));
+}
+
 h1 { text-transform: uppercase; font-size: 34px; }
 h2 { text-transform: uppercase; }
 
@@ -174,7 +182,7 @@ button {
 </div>
 
 <div class="container" id="welcomePage">
-  <img src="OFK.png" width="90">
+  <img id="welcomeLogo" src="OFK.png">
   <h1>OFK Jersey Reveal</h1>
   <button onclick="startReveal()">Start</button>
 </div>
@@ -196,7 +204,7 @@ button {
   <img id="teamLogo">
 </div>
 
-<audio id="cheer-sound" src="im_coming_to_the_cotta.mp3"></audio>
+<audio id="cheer-sound" src="im_coming_to_the_cottage.mp3"></audio>
 
 <script>
 
@@ -243,7 +251,7 @@ function fireworksShow(){
         innerWidth*(0.2+Math.random()*0.6),
         innerHeight*(0.2+Math.random()*0.3)
       );
-    },i*350); // 🔥 slower spacing
+    },i*350);
   }
 }
 
@@ -276,7 +284,6 @@ function startReveal(){
   inputPage.classList.remove("hidden");
 }
 
-/* 🔍 LOGIC */
 function revealTeam(){
 
   let first = firstName.value.trim().toLowerCase();
@@ -316,17 +323,14 @@ function revealTeam(){
   }
 }
 
-/* 🔥 FIXED SYNC */
 function showTeam(player){
 
-  // set content first
   teamName.textContent = player.team;
 
   if(teamLogos[player.team]){
     teamLogo.src = teamLogos[player.team];
   }
 
-  // show instantly
   inputPage.classList.add("hidden");
   revealPage.classList.remove("hidden");
 
@@ -334,7 +338,6 @@ function showTeam(player){
     revealPage.classList.add("show");
   });
 
-  // sound + fireworks together
   let a=document.getElementById("cheer-sound");
   a.currentTime=0;
   a.play().catch(()=>{});
