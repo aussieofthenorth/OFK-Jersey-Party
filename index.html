@@ -576,17 +576,23 @@ function startReveal(){
   welcomePage.classList.add("hidden");
   inputPage.classList.remove("hidden");
 }
-
+function normalize(str) {
+  return str
+    .toLowerCase()
+    .replace(/[’']/g, "")   // remove apostrophes (both types)
+    .replace(/\s+/g, "");   // remove spaces
+}
+  
 function revealTeam(){
 
-  let first = firstName.value.trim().toLowerCase();
-  let last = surname.value.trim().toLowerCase();
-  let middle = middleInitial.value.trim().toLowerCase();
+  let first = firstName.value.trim();
+  let last = surname.value.trim();
+  let middle = middleInitial.value.trim();
 
-  let matches = playerData.filter(p =>
-    p.firstName.toLowerCase() === first &&
-    p.surname.toLowerCase() === last
-  );
+ let matches = playerData.filter(p =>
+  normalize(p.firstName) === normalize(first) &&
+  normalize(p.surname) === normalize(last)
+);
 
   if(matches.length === 0){
     alert("Name not found");
@@ -606,8 +612,8 @@ function revealTeam(){
   }
 
   let player = matches.find(p =>
-    p.middleInitial.toLowerCase() === middle
-  );
+  normalize(p.middleInitial) === normalize(middle)
+);
 
   if(player){
     showTeam(player);
